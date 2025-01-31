@@ -42,6 +42,8 @@ function [seg_img,block4,block16] = callose_segmentation(t_ca_1,t_ca_2,t_cb_1,t_
             end
         end
 
+        clear num_colors_c cc_ca f_pix_ca f_pixcount_ca good_idx_ca pxl_idx_ca sub_ca
+
         % Ignore large callose regions
         seg_img_cb = L_c-seg_img_ca; % Calculate cb coarse-refined image
         
@@ -66,6 +68,8 @@ function [seg_img,block4,block16] = callose_segmentation(t_ca_1,t_ca_2,t_cb_1,t_
                 seg_img_c(sub_cb(n,1),sub_cb(n,2)) = 1; % Assign the threshold connected pixels to final coarse-refined image
             end
         end
+
+        clear cc_cb f_pix_cb f_pixcount_cb good_idx_cb pxl_idx_cb sub_cb
 
         %% Fine refining
 
@@ -98,6 +102,8 @@ function [seg_img,block4,block16] = callose_segmentation(t_ca_1,t_ca_2,t_cb_1,t_
             end
         end
 
+        clear num_colors_f cc_fa f_pix_fa f_pixcount_fa good_idx_fa pxl_idx_fa sub_fa
+
         % Retaining desirable callose features missed out during coarse
         % refining process
         seg_img_fb = L_f-seg_img_fa; % Calculate fb fine-refined image
@@ -123,6 +129,8 @@ function [seg_img,block4,block16] = callose_segmentation(t_ca_1,t_ca_2,t_cb_1,t_
                 seg_img_f(sub_fb(n,1),sub_fb(n,2)) = 1; % Assign the threshold connected pixels to final fine-refined image
             end
         end
+
+        clear cc_fb f_pix_fb f_pixcount_fb good_idx_fb pxl_idx_fb sub_fb
 
         %% Determining callose-segmented image
 
